@@ -5,8 +5,9 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	template="/templates/default.xhtml">
 	<ui:define name="content">
-		<p>#{msg.applicationInfo}</p>
-		
-		
+		<p>Try to log-out</p>
+		<h:form>
+			<h:commandButton action="#{login.logout}" value="Sign-out" />
+		</h:form>
 	</ui:define>
 </ui:composition>

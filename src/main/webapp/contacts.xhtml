@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml">
+	<ui:define name="content">
+		<h:form>
+			<h:dataTable value="#{contactBean.allContacts}" var="contact">
+				<h:column>
+					<f:facet name="header">FirstName</f:facet>
+					<h:outputText value="#{contact.firstName}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">LastName</f:facet>
+					<h:outputText value="#{contact.lastName}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">CheckDetails</f:facet>
+					<h:commandLink value="Details" action="#{contactBean.showDetails(contact)}" />
+				</h:column>
+			</h:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

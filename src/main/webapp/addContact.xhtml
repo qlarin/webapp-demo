@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<ui:define name="content">
+		<h:form id="contactAddForm">
+			<h:panelGrid columns="3">
+
+				<h:outputText value="FirstName" />
+				<h:inputText value="#{contactBean.contact.firstName}"
+					requiredMessage="Empty field" id="firstName">
+					<f:validateRequired />
+					<f:validateLength minimum="3" maximum="15" />
+					<f:ajax event="blur" render="firstNameMessage" />
+				</h:inputText>
+				<rich:message id="firstNameMessage" for="firstName" />
+
+				<h:outputText value="LastName" />
+				<h:inputText value="#{contactBean.contact.lastName}"
+					requiredMessage="Empty field" id="lastName">
+					<f:validateRequired />
+					<f:validateLength minimum="3" maximum="15" />
+					<f:ajax event="blur" render="lastNameMessage" />
+				</h:inputText>
+				<rich:message id="lastNameMessage" for="lastName" />
+
+				<h:outputText value="Email" />
+				<h:inputText value="#{contactBean.contact.email}"
+					requiredMessage="Empty field" id="email">
+					<f:validateRequired />
+					<f:validateRegex
+						pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+					<f:ajax event="blur" render="emailMessage" />
+				</h:inputText>
+				<rich:message id="emailMessage" for="email" />
+
+				<h:outputText value="Phone" />
+				<h:inputText value="#{contactBean.contact.phone}"
+					requiredMessage="Empty field" id="phone">
+					<f:validateRequired />
+					<f:validateRegex pattern="[0-9]{9}" />
+					<f:ajax event="blur" render="phoneMessage" />
+				</h:inputText>
+				<rich:message id="phoneMessage" for="phone" />
+
+				<h:outputText value="Date of birth" requiredMessage="Empty field" />
+				<rich:calendar id="dob" value="#{contactBean.contact.dateOfBirth}"
+					datePattern="yyyy.MM.dd">
+					<f:validateRequired />
+					<f:ajax event="change" render="dobMessage" />
+				</rich:calendar>
+				<rich:message id="dobMessage" for="dob" />
+				<f:facet name="footer">
+					<a4j:commandButton id="button" action="#{contactBean.addContact}"
+						value="Submit" binding="#{contactBean.button}" />
+				</f:facet>
+			</h:panelGrid>
+			<h:panelGrid>
+				<rich:messages for="button" style="color:red" id="messages"
+					showDetail="false" showSummary="true" />
+			</h:panelGrid>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

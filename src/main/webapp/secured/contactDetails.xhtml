@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml">
+	<ui:define name="content">
+		<h:form>
+			<p>Welcome #{login.username}</p>
+			<h:dataTable value="#{contactBean.contactToShow}" var="contact">
+				<h:column>
+					<f:facet name="header">Id</f:facet>
+					<h:outputText value="#{contact.idContact}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">FirstName</f:facet>
+					<h:outputText value="#{contact.firstName}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">LastName</f:facet>
+					<h:outputText value="#{contact.lastName}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Email</f:facet>
+					<h:outputText value="#{contact.email}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Phone</f:facet>
+					<h:outputText value="#{contact.phone}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Date of birth</f:facet>
+					<h:outputText value="#{contact.dateOfBirth}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Delete</f:facet>
+					<h:commandLink action="#{contactBean.deleteContact(contact)}"
+						value="Delete" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Edit</f:facet>
+					<h:link outcome="/editContact?faces-redirect=true"
+						value="Edit">
+						<f:param name="contact" value="#{contact.idContact}" />
+					</h:link>
+				</h:column>
+			</h:dataTable>
+		</h:form>
+		<h:form>
+			<h:commandLink action="/addContact?faces-redirect=true"
+				value="Add new" />
+		</h:form>
+
+	</ui:define>
+</ui:composition>

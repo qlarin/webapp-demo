@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<ui:define name="content">
+		<p>Login to get another permissions:</p>
+
+		<h:form id="loginForm">
+			<h:panelGrid columns="3">
+				<f:facet name="header">Login Form</f:facet>
+				<h:outputText value="Username" />
+				<h:inputText value="#{login.username}" id="username"
+					requiredMessage="Empty field">
+					<f:validateRequired />
+					<f:ajax event="blur" render="usernameMessage" />
+				</h:inputText>
+				<rich:message id="usernameMessage" for="username" />
+
+				<h:outputText value="Password" />
+				<h:inputSecret value="#{login.password}" id="password"
+					requiredMessage="Empty field">
+					<f:validateRequired />
+					<f:ajax event="blur" render="passwordMessage" />
+				</h:inputSecret>
+				<rich:message id="passwordMessage" for="password" />
+
+				<f:facet name="footer">
+					<a4j:commandButton id="loginButton" action="#{login.validateInput}"
+						value="Sing-in" binding="#{login.loginButton}" />
+				</f:facet>
+			</h:panelGrid>
+			<h:panelGrid>
+				<rich:messages for="loginButton" style="color:red" id="messages"
+					showDetail="false" showSummary="true" />
+			</h:panelGrid>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
